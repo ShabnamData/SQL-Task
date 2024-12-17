@@ -207,3 +207,58 @@ conn.close()
 #                                      'Description': list(DealSizeList.keys())})
 # Valid_customer = [x for x in df['companyname'].dropna().unique()]
 # Valid_customer
+# Valid_customer = [x for x in df[['StatusList','Productlines','ProductCodes','CustomerNames','Cities','States','PostalCodes','Countries','DealSizeList']].dropna()]
+# Valid_customer
+# cursor = conn.cursor()
+# for index, row in df.iterrows():
+#     cursor.execute('INSERT INTO [test].[Fact_df_KPI] (StatusList,Productlines,ProductCodes,CustomerNames,Cities,States,PostalCodes,Countries,DealSizeList) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+#                    row['StatusList'], row['Productlines'], row['ProductCodes'], row['CustomerNames'], row['Cities'], row['States'], row['PostalCodes'], row['Countries'],row['DealSizeList'])
+# conn.commit()
+
+# # df.to_excel('test.xlsx')
+
+
+# conn.close()
+df.drop_duplicates(inplace=True)
+df
+Unique_status = [x for x in df['STATUS'].dropna().unique()]
+Unique_PRODUCTLINE = [x for x in df['PRODUCTLINE'].dropna().unique()]
+Unique_CUSTOMERNAME = [x for x in df['CUSTOMERNAME'].dropna().unique()]
+Unique_CITY = [x for x in df['CITY'].dropna().unique()]
+Unique_STATE = [x for x in df['STATE'].dropna().unique()]
+Unique_POSTALCODE = [x for x in df['POSTALCODE'].dropna().unique()]
+Unique_COUNTRY = [x for x in df['COUNTRY'].dropna().unique()]
+Unique_DEALSIZE = [x for x in df['DEALSIZE'].dropna().unique()]
+import pyodbc
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-NQGB2T3;'
+                      'Database=test;'
+                      'Trusted_Connection=yes;')
+cursor = conn.cursor()
+for i in Unique_status:
+   cursor.execute("INSERT INTO [dbo].[StatusList] (STATUS) values(?)", (i,))
+conn.commit() 
+for i in Unique_PRODUCTLINE:
+ cursor.execute("INSERT INTO [dbo].[PRODUCTLINES] (PRODUCTLINE) values(?)", (i,))
+conn.commit()
+for i in Unique_CUSTOMERNAME:
+    cursor.execute("INSERT INTO [dbo].[CustomerNames] (CUSTOMERNAME) values(?)", (i,))
+conn.commit()
+for i in Unique_CITY:
+    cursor.execute("INSERT INTO [dbo].[Cities] (CITY) values(?)", (i,))
+conn.commit()
+for i in Unique_STATE:
+    cursor.execute("INSERT INTO [dbo].[States] (STATE) values(?)", (i,))
+conn.commit()
+for i in Unique_POSTALCODE:
+    cursor.execute("INSERT INTO [dbo].[PostalCodes] (POSTALCODE) values(?)", (i,))
+conn.commit()
+for i in Unique_COUNTRY:
+    cursor.execute("INSERT INTO [dbo].[Countries] (COUNTRY) values(?)", (i,))
+    conn.commit()
+for i in Unique_DEALSIZE:
+    cursor.execute("INSERT INTO [dbo].[DealSizeList] (DEALSIZE) values(?)", (i,))
+conn.commit() 
+
+cursor.close()
+conn.close ()

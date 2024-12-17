@@ -144,9 +144,66 @@ conn.close()
 # conn.close
 # df
 
+# def create_tables_and_insert_data(table_name, column_name, values):
+#     conn = sqlite3.connect('dimension_tables.db')
+#     c = conn.cursor()
+#     c.execute(f"CREATE TABLE {table_name} (ID INTEGER PRIMARY KEY AU[TOINCREMENT, Description TEXT)")
+#     for value in values:
+#         c.execute(f"INSERT INTO {table_name} (Description) VALUES (?)", (value,))
+#     conn.commit()
+#     conn.close()
+# Initialize empty dictionaries for each field
+# StatusList = {}
+# ProductLines = {}
+# ProductCodes= {}
+# CostumerNames = {}
+# Cities = {}
+# States = {}
+# PostalCodes = {}
+# Countries = {}
+# DealSizeList = {}
+
+# # Iterate over the data and populate the dictionaries with unique values
+# for index, row in df.iterrows():
+#     StatusList [row['StatusList']] = True
+#     ProductLines[row['ProductLines']] = True
+#     ProductCodes[row['ProductCodes']] = True
+#     CostumerNames[row['CustomerNames']] = True
+#     Cities[row['Cities']] = True
+#     States[row['States']] = True
+#     PostalCodes[row['PostalCodes']] = True
+#     Countries[row['Countries']] = True
+#     DealSizeList[row['DealSizeList']] = True
+
+# status_table = pd.DataFrame({'ID': range(1, len(StatusList ) + 1),
+#                             'Description': list(StatusList .keys())})
+
 
 # df2 = pd.read_sql('Select distinct companyname from dbo.my_table', conn)
 # df2
 
+# product_lines_table = pd.DataFrame({'ID': range(1, len(ProductLines) + 1),
+#                                     'Description': list(ProductLines.keys())})
+
+# product_codes_table = pd.DataFrame({'ID': range(1, len(ProductCodes) + 1),
+#                                     'Description': list(ProductCodes.keys())})
+
+# customer_names_table = pd.DataFrame({'ID': range(1, len(CostumerNames) + 1),
+#                                      'Description': list(CostumerNames.keys())})
+
+# cities_table = pd.DataFrame({'ID': range(1, len(Cities) + 1),
+#                              'Description': list(Cities.keys())})
+
+# states_table = pd.DataFrame({'ID': range(1, len(States) + 1),
+#                              'Description': list(States.keys())})
+
+# postal_codes_table = pd.DataFrame({'ID': range(1, len(PostalCodes) + 1),
+#                                    'Description': list(PostalCodes.keys())})
+
+# countries_table = pd.DataFrame({'ID': range(1, len(Countries) + 1),
+#                                 'Description': list(Countries.keys())})
+
+# deal_size_list_table = pd.DataFrame({'ID': range(1, len(DealSizeList) + 1),
+#                                      'Description': list(DealSizeList.keys())})
 # Valid_customer = [x for x in df['companyname'].dropna().unique()]
 # Valid_customer

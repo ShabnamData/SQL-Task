@@ -262,3 +262,30 @@ conn.commit()
 
 cursor.close()
 conn.close ()
+
+
+conn = pyodbc.connect('Driver={SQL Server};'
+                        'Server=DESKTOP-NQGB2T3;'
+                        'Database=test;'
+
+                        'Trusted_Connection=yes;'
+                        "encoding='latin1'")
+
+StatusList = pd.read_sql('Select * from dbo.StatusList', conn)
+Productlines = pd.read_sql('Select * from dbo.Productlines', conn)
+CustomerNames=pd.read_sql('Select * from dbo.CustomerNames', conn)
+Cities = pd.read_sql('Select * from dbo.Cities', conn)
+States = pd.read_sql('Select * from dbo.States', conn)
+Countries = pd.read_sql('Select * from dbo.Countries', conn)
+DealSizeList = pd.read_sql('Select * from dbo.DealSizeList', conn)
+PostalCodes = pd.read_sql('Select * from dbo. PostalCodes', conn)
+
+conn.close () 
+merged=pd.merge(df,StatusList, left_on='STATUS',right_on='STATUS',how='inner')
+merged=pd.merge(merged,Productlines, left_on='PRODUCTLINE',right_on='PRODUCTLINE',how='inner')
+merged=pd.merge(df,CustomerNames, left_on='CUSTOMERNAME',right_on='CUSTOMERNAME',how='inner')
+merged=pd.merge(df,Cities, left_on='CITY',right_on='CITY',how='inner')
+merged=pd.merge(df,States, left_on='STATE',right_on='STATE',how='inner')
+merged=pd.merge(df,Countries, left_on='COUNTRY',right_on='COUNTRY',how='inner')
+merged=pd.merge(df,PostalCodes, left_on='POSTALCODE',right_on='POSTALCODE',how='inner')
+merged=pd.merge(df,DealSizeList, left_on='DEALSIZE',right_on='DEALSIZE',how='inner')
